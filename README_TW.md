@@ -1,6 +1,6 @@
 # 網路聊天伺服器
 
-繁體中文|English(README.md)
+繁體中文 | [English](README.md)
 
 本項目使用 c 語言及 TCP/IP 協定搭建於 linux 底下運行的網路聊天伺服器。
 
