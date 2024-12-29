@@ -1,126 +1,83 @@
 # Network Chat Server
 
-[繁體中文](README_TW.md) | English
+[繁體中文](README.md) | English
 
-This project is a network chat server implemented in C language using the TCP/IP protocol, running on a Linux platform.
+This project is a network chat server built in C, using the TCP/IP protocol. It runs on a Linux platform.
+
+---
 
 ## Project Structure
 
 ```
 server
-    |-- bin/           // Executable commands
-    |-- include/       // All .h files
-    |-- object/        // Object files
-    |-- src/           // Source code
-    |-- tmp/
-    |   |-- userlist   // Records users on the server and contains FIFO files
-    |-- init_mysql.sql // Initializes the MySQL database
-    |-- Makefile       // Script for compilation
-    |-- `shell`        // Executable file
+├── bin/           # Executable commands
+├── include/       # Header files
+├── object/        # Object files
+├── src/           # Source code
+├── tmp/
+│   ├── userlist   # Tracks current users and stores FIFO files
+├── init_mysql.sql # MySQL database initialization script
+├── Makefile       # Compilation script
+└── shell          # Main executable file
 ```
 
-## Running Guide
+---
 
-For Windows systems, use WSL. Navigate to the project directory (./server) and execute the `shell` file. Then, open another terminal tab and connect to the server listener with the following command:
+## How to Run
 
-```bash
-telnet 127.0.0.1 6000
-```
+1. For **Windows systems**, use **WSL**.
+2. Navigate to the project directory:
+   ```bash
+   cd ./server
+   ```
+3. Execute the `shell` program:
+   ```bash
+   ./shell
+   ```
+4. In another terminal window, connect to the server:
+   ```bash
+   telnet 127.0.0.1 6000
+   ```
 
-## Server Command Features
+---
 
-- **quit**
+## Available Commands
 
-    > Usage: Exit the server.
+| Command        | Description                                                    | Format                              |
+|----------------|----------------------------------------------------------------|-------------------------------------|
+| `quit`         | Exit the server.                                              |                                     |
+| `who`          | Show all active users.                                        |                                     |
+| `tell`         | Send a private message to a specific user.                    | `tell <user_id> <message>`         |
+| `yell`         | Broadcast a message to all users.                             | `yell <message>`                   |
+| `name`         | Change your username.                                         | `name <new_name>`                  |
+| `listMail`     | Display all emails in your mailbox.                           |                                     |
+| `mailto`       | Send an email to a specific user.                             | `mailto <user_name> <message>`     |
+| `delMail`      | Delete an email from your mailbox.                            | `delMail <mail_id>`                |
+| `gyell`        | Broadcast a message to your group.                            | `gyell <group_name> <message>`     |
+| `createGroup`  | Create a new group.                                           | `createGroup <group_name>`         |
+| `delGroup`     | Delete a group (only by the owner).                           | `delGroup <group_name>`            |
+| `addTo`        | Invite users to a group (only by the owner).                  | `addTo <group_name> <user1> ...`   |
+| `leaveGroup`   | Leave a group.                                                | `leaveGroup <group_name>`          |
+| `listGroup`    | Display the groups you belong to.                             |                                     |
+| `remove`       | Remove users from a group (only by the owner).                | `remove <group_name> <user1> ...`  |
 
-- **who**
+---
 
-    > Usage: Display information about all users.
+## Makefile Usage
 
-- **tell**
+- **Compile All**: Compile all files in the `src/` directory and output executables to `bin/`.
+  ```bash
+  make all
+  ```
 
-    > Usage: Send a message to a specific user.  
+- **Clean Executables**: Remove all executables in the `bin/` folder (excluding non-`src/` files).
+  ```bash
+  make clean
+  ```
 
-    > Format: `tell` `user_id` `message`
-
-- **yell**
-
-    > Usage: Broadcast a message.  
-
-    > Format: `yell` `message`
-
-- **name**
-
-    > Usage: Change your name using this command.  
-
-    > Format: `name` `new name`
-
-- **listMail**
-
-    > Usage: List all emails in your mailbox.  
-
-- **mailto**
-
-    > Usage: Send an email to someone.  
-
-    > Format: 
-    > `mailto` `user_name` `message`
-    >> or  
-    >> `mailto` `user_name` `< ls`  
-    >> `<` means redirect the output of `ls` to `user_name`.
-
-- **delMail**
-
-    > Usage: Delete an email from your mailbox.  
-
-    > Format: `delMail` `mail_id`
-
-- **gyell**
-
-    > Usage: Similar to `yell`, but `gyell` broadcasts messages to users in the same group instead of all online users.  
-
-    > Format: `gyell` `group_name` `message`
-
-- **createGroup**
-
-    > Usage: Create a group.  
-
-    > Format: `createGroup` `group_name`
-
-- **delGroup**
-
-    > Usage: Delete a group. Only the owner can delete it.  
-
-    > Format: `delGroup` `group_name`
-
-- **addTo**
-
-    > Usage: Invite users to a group. Only the owner can invite others.  
-
-    > Format: `addTo` `group_name` `user_name1` `user_name2` …  
-
-- **leaveGroup**
-
-    > Usage: Leave a group.  
-
-    > Format: `leaveGroup` `group_name`
-
-- **listGroup**
-
-    > Usage: List groups you belong to.  
-
-- **remove**
-
-    > Usage: Remove a user from a group. Only the group owner can do this.  
-
-    > Format: `remove` `group_name` `user_name` `user_name` …  
-
-## Makefile Syntax
-
-- `make all`: Compile all files under `src/` and place the executable files in the `bin/` folder.
-
-- `make clean`: Clean up all executable files in the `bin/` folder, except those not under `src/`.
+---
 
 ## References
 
-This project is an assignment for the 2024 Fall Network and Programming course at Dong Hwa University. [Assignment Link](https://hackmd.io/@chtsai/networkProgramming)
+This project was developed as part of the **2024 Dong Hwa University Fall Network Programming** course.  
+For more details, see the [assignment description](https://hackmd.io/@chtsai/networkProgramming).
