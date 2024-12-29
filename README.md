@@ -1,6 +1,6 @@
 # Network Chat Server
 
-繁體中文 (README_TW.md) | English
+[繁體中文](README_TW.md) | English
 
 This project is a network chat server implemented in C language using the TCP/IP protocol, running on a Linux platform.
 
